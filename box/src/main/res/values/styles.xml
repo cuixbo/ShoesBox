@@ -1,0 +1,54 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+    <!-- QMUI theme. -->
+    <style name="QMUITheme" parent="QMUI.Compat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ShoesItemTheme">
+        <item name="android:layout_height">@dimen/item_height_small</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="sDividerLineHeight">0dp</item>
+        <item name="sUseRipple">false</item>
+        <item name="sRightTextColor">@color/text_content</item>
+        <item name="sRightTextSize">13sp</item>
+        <item name="sRightTextGravity">center</item>
+        <!--
+            <item name="sRightTvDrawableHeight">16dp</item>
+            <item name="sRightTvDrawableWidth">16dp</item>
+            <item name="sRightTvDrawableRight">@drawable/ic_more_gray_light</item>
+        -->
+    </style>
+
+    <style name="ChipTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textAppearance">?attr/textAppearanceCaption</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="chipMinHeight">24dp</item>
+        <item name="chipStartPadding">0dp</item>
+        <item name="chipBackgroundColor">#f3f3f3</item>
+    </style>
+</resources>

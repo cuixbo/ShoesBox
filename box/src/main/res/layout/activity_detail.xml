@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/navi_title_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_oc" />
+
+            <LinearLayout
+                android:id="@+id/ll_detail_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:divider="@color/color_divider"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="编号"
+                    app:sRightTextString="A1" />
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="主人"
+                    app:sRightTextString="小黄盖" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/tv_brand"
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="品牌"
+                    app:sRightTextString="NIKE" />
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="季节"
+                    app:sRightTextString="秋冬" />
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="类型"
+                    app:sRightTextString="跑步鞋" />
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="颜色"
+                    app:sRightTextString="蓝色" />
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="尺码"
+                    app:sRightTextString="43" />
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="备注"
+                    app:sRightTextString="2019年双十一买的" />
+
+                <com.allen.library.SuperTextView
+                    style="@style/ShoesItemTheme"
+                    app:sLeftTextString="标签"
+                    app:sRightTextString="潮流" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

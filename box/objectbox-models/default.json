@@ -1,0 +1,148 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7030132176271931888",
+      "lastPropertyId": "5:8982727410513706069",
+      "name": "Owner",
+      "properties": [
+        {
+          "id": "1:8808815993817607081",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3304997298862805437",
+          "name": "name",
+          "indexId": "1:7334558592772070533",
+          "type": 9,
+          "flags": 2080
+        },
+        {
+          "id": "3:1951655191255185673",
+          "name": "gender",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "4:8527065128594317484",
+          "name": "avatar",
+          "type": 9
+        },
+        {
+          "id": "5:8982727410513706069",
+          "name": "comment",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:3700123287927160842",
+      "lastPropertyId": "17:317603817377113316",
+      "name": "Shoes",
+      "properties": [
+        {
+          "id": "1:1799078140443110980",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8381372767947083507",
+          "name": "sNumber",
+          "type": 9
+        },
+        {
+          "id": "4:6368464979772387286",
+          "name": "ownerName",
+          "type": 9
+        },
+        {
+          "id": "5:7404928548146109821",
+          "name": "brand",
+          "type": 9
+        },
+        {
+          "id": "6:4078688222640196456",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "7:2519128608978374412",
+          "name": "material",
+          "type": 9
+        },
+        {
+          "id": "8:4725757085879523435",
+          "name": "color",
+          "type": 9
+        },
+        {
+          "id": "9:7720417666644966670",
+          "name": "season",
+          "type": 9
+        },
+        {
+          "id": "10:3761058545785169814",
+          "name": "gender",
+          "type": 5,
+          "flags": 4
+        },
+        {
+          "id": "11:5307742868318227002",
+          "name": "size",
+          "type": 7,
+          "flags": 4
+        },
+        {
+          "id": "12:7831934066493342658",
+          "name": "images",
+          "type": 9
+        },
+        {
+          "id": "13:4738669859327957468",
+          "name": "tags",
+          "type": 9
+        },
+        {
+          "id": "14:9082440024431887233",
+          "name": "comment",
+          "type": 9
+        },
+        {
+          "id": "15:4971349890845012620",
+          "name": "extra",
+          "type": 9
+        },
+        {
+          "id": "16:1939017511563185500",
+          "name": "createAt",
+          "type": 9
+        },
+        {
+          "id": "17:317603817377113316",
+          "name": "updateAt",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:3700123287927160842",
+  "lastIndexId": "1:7334558592772070533",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    216765647937258316
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
