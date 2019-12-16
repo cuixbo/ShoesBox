@@ -3,4 +3,6 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="item_height_small">60dp</dimen>
+    <dimen name="nav_height">44dp</dimen>
+    <dimen name="nav_height_tall">48dp</dimen>
 </resources>

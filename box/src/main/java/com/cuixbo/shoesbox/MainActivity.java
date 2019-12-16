@@ -47,7 +47,9 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
 
     @Override
     public void initIntent() {
-
+        Intent intent = new Intent(this, EditActivity.class);
+        intent.setClass(this,SettingActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -67,7 +69,7 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
                 mTitle[i] = owners.get(i).name;
                 mFragments.add(ShoesListFragment.newInstance(owners.get(i)));
             }
-//            mTitle[mTitle.length - 1] = "设置";
+            mTitle[mTitle.length - 1] = "设置";
 //            mFragments.add(MeFragment.newInstance());
         } catch (Exception e) {
             e.printStackTrace();

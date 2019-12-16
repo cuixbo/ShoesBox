@@ -13,10 +13,14 @@
     <color name="color_bg_dark">#f0f0f0</color>
     <color name="color_pressed">#e0e0e0</color>
     <color name="color_divider">#DBDBDB</color>
+    <!--自然色-->
     <color name="white">#FFFFFF</color>
+    <color name="trans">@android:color/transparent</color>
     <!--字体颜色等-->
     <color name="text_title">#333333</color>
     <color name="text_content">#8E8E8E</color>
     <color name="text_hint">#BBBBBB</color>
     <color name="text_link">#ADC0CD</color>
+    <!--业务自定义-->
+    <color name="color_title">#F78C1F</color>
 </resources>

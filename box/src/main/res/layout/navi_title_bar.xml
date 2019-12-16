@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navi_title_bar"
     android:layout_width="match_parent"
-    android:layout_height="44dp"
+    android:layout_height="@dimen/nav_height"
     app:sCenterMaxEms="16"
     app:sCenterTextString="TITLE"
     app:sLeftIconRes="@drawable/ic_back_gray_dark"
