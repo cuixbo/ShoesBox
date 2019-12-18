@@ -54,9 +54,12 @@
                 android:layout_height="@dimen/nav_height_tall"
                 android:layout_marginTop="20dp"
                 app:contentInsetStartWithNavigation="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetLeft="0dp"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_back_white"
                 app:title="我的"
+                app:titleMarginStart="0dp"
                 app:titleTextAppearance="?attr/textAppearanceBody1"
                 app:titleTextColor="@color/white" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -71,6 +74,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_bg"
         app:behavior_overlapTop="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -79,16 +83,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
-
-            <com.allen.library.SuperTextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/nav_height_tall"
-                app:sDividerLineType="both"
-                app:sLeftTextString="用户管理"
-                app:sRightIconRes="@drawable/ic_more_gray_light" />
+            <include layout="@layout/include_content_me" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

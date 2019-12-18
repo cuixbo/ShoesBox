@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/fragment_me">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.allen.library.SuperTextView
+            style="@style/EntryTheme"
+            app:sLeftTextString="浏览历史" />
+
+        <com.allen.library.SuperTextView
+            style="@style/EntryTheme"
+            app:sLeftTextString="已收藏" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.allen.library.SuperTextView
+            style="@style/EntryTheme"
+            app:sLeftTextString="用户管理" />
+
+        <com.allen.library.SuperTextView
+            style="@style/EntryTheme"
+            app:sLeftTextString="极简模式" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.allen.library.SuperTextView
+            style="@style/EntryTheme"
+            app:sLeftTextString="清理缓存"
+            app:sRightIconRes="@null" />
+
+        <com.allen.library.SuperTextView
+            style="@style/EntryTheme"
+            app:sLeftTextString="关于" />
+    </LinearLayout>
+</merge>
+

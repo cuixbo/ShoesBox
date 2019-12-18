@@ -5,4 +5,5 @@
     <dimen name="item_height_small">60dp</dimen>
     <dimen name="nav_height">44dp</dimen>
     <dimen name="nav_height_tall">48dp</dimen>
+    <dimen name="entry_height">48dp</dimen>
 </resources>
