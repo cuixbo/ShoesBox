@@ -1,13 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity"
+    tools:ignore="ContentDescription">
 
-
-    <com.allen.library.SuperTextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_small"
-        app:sLeftTextString="用户管理"
-        app:sRightTvDrawableRight="@drawable/ic_more_gray_light" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fitsSystemWindows="false">
+        <!--
+            contentScrim:Collapse时Toolbar颜色
+            scrimVisibleHeightTrigger:在某个高度开始Toolbar颜色开始变化
+            scrimAnimationDuration:Toolbar颜色变化时间
+            layout_scrollFlags:
+                snap:松手会回弹（Collapse、Expand）
+                exitUntilCollapsed:收缩时保留Toolbar
+            titleEnabled:是否允许title变化
+        -->
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/color_title"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:scrimAnimationDuration="300"
+            app:titleEnabled="false">
+            <!--
+                layout_collapseMode:Image与ScrollContent的联合滚动效果：固定/视差
+                layout_collapseParallaxMultiplier:视差滚动时，视差系数
+            -->
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="222dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_banner_01"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5" />
+            <!--
+               layout_collapseMode:这个参数决定了Toolbar是否视差滚动，还是固定，如果不设置，则收缩后Toolbar的
+               icon，logo等看不见但位置却留着，Title可以看见。
+               contentInsetStartWithNavigation:navigationIcon与Title的间距
+            -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_height_tall"
+                android:layout_marginTop="20dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_back_white"
+                app:title="我的"
+                app:titleTextAppearance="?attr/textAppearanceBody1"
+                app:titleTextColor="@color/white" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <!--
+        这里需要为ScrollView或者RecyclerView等可滑动控件。
+        behavior_overlapTop:ScrollContent与AppBar的偏移
+        layout_behavior:scrolling_view的滚动位置，设置了appbar_scrolling_view_behavior，
+            ScrollContent才会在AppBar的下方
+    -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_overlapTop="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <com.allen.library.SuperTextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/nav_height_tall"
+                app:sDividerLineType="both"
+                app:sLeftTextString="用户管理"
+                app:sRightIconRes="@drawable/ic_more_gray_light" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

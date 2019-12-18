@@ -48,7 +48,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:sShapeType="oval"
-                app:sSolidColor="#fed765" />
+                app:sSolidColor="@color/color_title" />
 
             <LinearLayout
                 android:layout_width="match_parent"

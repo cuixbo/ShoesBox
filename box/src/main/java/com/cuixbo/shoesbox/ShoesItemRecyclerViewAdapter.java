@@ -35,6 +35,7 @@ public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItem
     public void updateData(List<Shoes> items) {
         mValues.clear();
         mValues.addAll(items);
+        notifyDataSetChanged();
     }
 
     @Override

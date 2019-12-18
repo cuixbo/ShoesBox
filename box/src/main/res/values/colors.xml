@@ -23,4 +23,5 @@
     <color name="text_link">#ADC0CD</color>
     <!--业务自定义-->
     <color name="color_title">#F78C1F</color>
+    <color name="color_bg_search">#EAEAEA</color>
 </resources>

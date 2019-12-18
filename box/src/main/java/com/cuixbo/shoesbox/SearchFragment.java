@@ -2,22 +2,40 @@ package com.cuixbo.shoesbox;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 
-import androidx.fragment.app.Fragment;
+import com.cuixbo.lib.common.base.BaseFragment;
+import com.cuixbo.shoesbox.data.local.Shoes;
+import com.cuixbo.shoesbox.presenter.ShoesPresenter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author xiaobocui
  * @date 2019-12-09
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends BaseFragment {
 
     private static final String ARG_MEMBER = "arg_member";
+    private ShoesItemRecyclerViewAdapter mAdapter;
+    private ShoesListFragment.OnListFragmentInteractionListener mListener;
+    private ShoesPresenter mPresenter;
+
+    private EditText mEtSearch;
 
     public SearchFragment() {
-
+        mPresenter = new ShoesPresenter();
     }
 
     @SuppressWarnings("unused")
@@ -26,6 +44,17 @@ public class SearchFragment extends Fragment {
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ShoesListFragment.OnListFragmentInteractionListener) {
+            mListener = (ShoesListFragment.OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -39,28 +68,59 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_me, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
-
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    protected void initIntent() {
 
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    protected void initView() {
+        if (getView() == null) {
+            return;
+        }
+        Context context = getView().getContext();
+        RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
+        mEtSearch = getView().findViewById(R.id.et_search);
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mAdapter = new ShoesItemRecyclerViewAdapter(mPresenter.searchShoes(mEtSearch.getText().toString()), mListener);
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    protected void initListener() {
+        mEtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                updateData(mPresenter.searchShoes(mEtSearch.getText().toString()));
+                Log.e("xbc", "actionId:" + actionId);
+                return true;
+            }
+            return false;
+        });
 
+        mEtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                mAdapter.updateData(new ArrayList<>());
+            }
+        });
+    }
+
+    public void updateData(List<Shoes> data) {
+        mAdapter.updateData(data);
     }
 
 }

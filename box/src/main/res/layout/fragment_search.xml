@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/list"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="20dp">
 
-    <com.allen.library.SuperTextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_small"
-        app:sLeftTextString="用户管理"
-        app:sRightTvDrawableRight="@drawable/ic_more_gray_light" />
+        android:layout_height="@dimen/nav_height"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/shape_search"
+            android:gravity="center_vertical"
+            android:hint="请输入关键词查找"
+            android:imeOptions="actionSearch"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAppearance="?attr/textAppearanceCaption" />
+
+        <View
+            style="@style/DividerTheme"
+            android:layout_gravity="bottom" />
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".SearchFragment"
+        tools:listitem="@layout/fragment_item" />
 </LinearLayout>

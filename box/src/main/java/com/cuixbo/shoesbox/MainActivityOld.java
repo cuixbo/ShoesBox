@@ -1,38 +1,36 @@
 package com.cuixbo.shoesbox;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.allen.library.SuperTextView;
-import com.cuixbo.lib.common.base.BaseFragment;
+import com.cuixbo.lib.common.base.BaseActivity;
 import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Owner;
+import com.cuixbo.shoesbox.data.local.Shoes;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import io.objectbox.Box;
 
 /**
+ * 1.list
+ * 2.detail+edit
+ * 3.me
+ * 4.setting
+ * 5.splash
+ *
  * @author xiaobocui
  * @date 2019-12-09
  */
-public class BoxFragment extends BaseFragment {
-
-    private static final String ARG_MEMBER = "arg_member";
-
+public class MainActivityOld extends BaseActivity implements ShoesListFragment.OnListFragmentInteractionListener {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -41,87 +39,24 @@ public class BoxFragment extends BaseFragment {
     private List<Fragment> mFragments = new ArrayList<Fragment>();
     private String[] mTitle;
 
-    public BoxFragment() {
-
-    }
-
-    @SuppressWarnings("unused")
-    public static BoxFragment newInstance() {
-        BoxFragment fragment = new BoxFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mOwner = (Owner) getArguments().getSerializable(ARG_MEMBER);
-        }
-        Log.e("xbc", "onCreate：" + this.hashCode());
+        setContentView(R.layout.activity_main);
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_box, container, false);
-        Log.e("xbc", "onCreateView：" + this.hashCode());
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initView();
-        initListener();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.e("xbc", "onDestroyView：" + this.hashCode());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.e("xbc", "onDestroy：" + this.hashCode());
-    }
-
-    @Override
-    protected void initIntent() {
-
+    public void initIntent() {
+        Intent intent = new Intent(this, EditActivity.class);
+        intent.setClass(this, SettingActivity.class);
+        startActivity(intent);
     }
 
     @Override
     public void initView() {
-        if (getView() == null) {
-            return;
-        }
-
-        Log.e("xbc", "initView：" + this.hashCode());
-        mTabLayout = getView().findViewById(R.id.tab_layout);
-        mViewPager = getView().findViewById(R.id.view_pager);
-        mNaviTitleBar = getView().findViewById(R.id.navi_title_bar);
+        mTabLayout = findViewById(R.id.tab_layout);
+        mViewPager = findViewById(R.id.view_pager);
+        mNaviTitleBar = findViewById(R.id.navi_title_bar);
 
         mNaviTitleBar.setLeftIcon(0);
         mNaviTitleBar.setCenterString("SHOES-BOX");
@@ -129,18 +64,22 @@ public class BoxFragment extends BaseFragment {
         try {
             Box<Owner> ownerBox = ObjectBox.get().boxFor(Owner.class);
             owners = ownerBox.getAll();
-            mTitle = new String[owners.size()];
-            mFragments.clear();
+            mTitle = new String[owners.size() + 1];
             for (int i = 0; i < owners.size(); i++) {
                 mTitle[i] = owners.get(i).name;
                 mFragments.add(ShoesListFragment.newInstance(owners.get(i)));
             }
+            mTitle[mTitle.length - 1] = "设置";
+//            mFragments.add(MeFragment.newInstance());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+//        mFragments.add(BoxFragment.newInstance());
+//        mFragments.add(SearchFragment.newInstance());
+//        mFragments.add(MeFragment.newInstance());
+
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
             @Override
             public CharSequence getPageTitle(int position) {
@@ -175,8 +114,9 @@ public class BoxFragment extends BaseFragment {
 
     @Override
     public void initListener() {
+
         mNaviTitleBar.setRightImageViewClickListener(imageView -> {
-            Intent intent = new Intent(getActivity(), EditActivity.class);
+            Intent intent = new Intent(this, EditActivity.class);
             startActivity(intent);
         });
 
@@ -198,5 +138,10 @@ public class BoxFragment extends BaseFragment {
         });
     }
 
-
+    @Override
+    public void onListFragmentInteraction(Shoes item) {
+        Intent intent = new Intent(this, EditActivity.class);
+        intent.putExtra("shoes_id", item.id);
+        startActivity(intent);
+    }
 }

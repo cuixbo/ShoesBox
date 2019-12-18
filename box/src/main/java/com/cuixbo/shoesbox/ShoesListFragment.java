@@ -81,7 +81,6 @@ public class ShoesListFragment extends Fragment {
         super.onStart();
         if (mAdapter != null) {
             mAdapter.updateData(mPresenter.getShoesList(mOwner.name));
-            mAdapter.notifyDataSetChanged();
         }
     }
 

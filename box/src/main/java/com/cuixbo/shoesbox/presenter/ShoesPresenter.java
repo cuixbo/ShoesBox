@@ -7,6 +7,7 @@ import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.data.local.Shoes_;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -30,6 +31,25 @@ public class ShoesPresenter {
         return getShoesBox()
                 .query()
                 .equal(Shoes_.ownerName, ownerName)
+                .build()
+                .find();
+    }
+
+    public List<Shoes> searchShoes(String keywords) {
+        if (keywords == null || keywords.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return getShoesBox()
+                .query()
+                .equal(Shoes_.sNumber, keywords).or()
+                .equal(Shoes_.ownerName, keywords).or()
+                .contains(Shoes_.brand, keywords).or()
+                .contains(Shoes_.material, keywords).or()
+                .equal(Shoes_.season, keywords).or()
+                .contains(Shoes_.type, keywords).or()
+                .contains(Shoes_.color, keywords).or()
+                .contains(Shoes_.comment, keywords).or()
+                .contains(Shoes_.tags, keywords)
                 .build()
                 .find();
     }
