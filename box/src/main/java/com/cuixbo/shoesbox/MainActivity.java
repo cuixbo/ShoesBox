@@ -38,6 +38,8 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_v2);
+        // 将StatusBar文字颜色设为深色
+        StatusBarUtil.setStatusBarLightMode(getWindow(), true);
     }
 
     @Override
@@ -94,7 +96,8 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                //这里开启的话，可以控制Activity中不同Fragment的StatusBar文字颜色模式
+//                StatusBarUtil.setStatusBarLightMode(getWindow(), !TextUtils.equals(tab.getText(), "我的"));
             }
 
             @Override

@@ -21,25 +21,16 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".SplashActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.Translucent">
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingActivity"
-            android:theme="@style/AppTheme.Translucent">
-           <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.Translucent" />
+        <activity android:name=".SettingActivity"></activity>
         <activity android:name=".DetailActivity" />
         <activity android:name=".EditActivity" />
         <!--添加provider-->
