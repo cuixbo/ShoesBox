@@ -2,6 +2,10 @@ package com.cuixbo.lib.common.base;
 
 import android.app.Application;
 
+/**
+ * @author xiaobocui
+ * @date 2019-12-19
+ */
 public class BaseApplication extends Application {
     protected static Application APPLICATION;
 

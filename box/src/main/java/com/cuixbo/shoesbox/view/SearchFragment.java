@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,12 +12,15 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import com.cuixbo.lib.common.base.BaseFragment;
+import com.cuixbo.shoesbox.R;
+import com.cuixbo.shoesbox.presenter.adapter.ShoesItemRecyclerViewAdapter;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.presenter.ShoesPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,7 +50,7 @@ public class SearchFragment extends BaseFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof ShoesListFragment.OnListFragmentInteractionListener) {
             mListener = (ShoesListFragment.OnListFragmentInteractionListener) context;
@@ -66,7 +69,7 @@ public class SearchFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search, container, false);
     }

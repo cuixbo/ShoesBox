@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
+/**
+ * @author xiaobocui
+ * @date 2019-12-19
+ */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Context mContext;
 
@@ -28,6 +33,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        initIntent();
+        initView();
+        initListener();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         log();
@@ -40,13 +53,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         log();
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         log();
     }
@@ -76,7 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onAttachFragment(Fragment fragment) {
+    public void onAttachFragment(@NonNull Fragment fragment) {
         super.onAttachFragment(fragment);
         log();
     }

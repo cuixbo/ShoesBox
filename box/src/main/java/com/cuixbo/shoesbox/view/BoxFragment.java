@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.allen.library.SuperTextView;
 import com.cuixbo.lib.common.base.BaseFragment;
+import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Owner;
 import com.google.android.material.tabs.TabLayout;
@@ -78,7 +79,7 @@ public class BoxFragment extends BaseFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
     }

@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.presenter.adapter;
 
 import android.net.Uri;
 import android.text.TextUtils;
@@ -9,18 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.cuixbo.shoesbox.ShoesListFragment.OnListFragmentInteractionListener;
+import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.Shoes;
-import com.cuixbo.shoesbox.dummy.DummyContent.DummyItem;
+import com.cuixbo.shoesbox.view.ShoesListFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ * RecyclerView列表适配器
+ *
+ * @author xiaobocui
+ * @date 2019-12-19
  */
 public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItemRecyclerViewAdapter.ViewHolder> {
 
@@ -34,7 +35,9 @@ public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItem
 
     public void updateData(List<Shoes> items) {
         mValues.clear();
-        mValues.addAll(items);
+        if (items != null && !items.isEmpty()) {
+            mValues.addAll(items);
+        }
         notifyDataSetChanged();
     }
 

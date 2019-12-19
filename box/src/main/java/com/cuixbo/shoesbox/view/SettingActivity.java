@@ -1,7 +1,10 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
+import com.cuixbo.shoesbox.R;
+import com.cuixbo.shoesbox.StatusBarUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
 

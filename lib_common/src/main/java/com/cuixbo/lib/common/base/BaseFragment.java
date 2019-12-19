@@ -1,6 +1,5 @@
 package com.cuixbo.lib.common.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -12,23 +11,28 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+/**
+ * @author xiaobocui
+ * @date 2019-12-19
+ */
 public abstract class BaseFragment extends Fragment {
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
     protected Context mContext;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        log("Context");
+    public void onInflate(@NonNull Context context, @NonNull AttributeSet attrs, @Nullable Bundle savedInstanceState) {
+        super.onInflate(context, attrs, savedInstanceState);
+        log();
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mContext = activity;
-        log("Activity");
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+        log("Context");
     }
 
     @Override
@@ -38,13 +42,16 @@ public abstract class BaseFragment extends Fragment {
         //fragment恢复后,恢复到原来的show,hide状态
         if (savedInstanceState != null) {
             boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            if (isSupportHidden) {
-                ft.hide(this);
-            } else {
-                ft.show(this);
+            FragmentManager fragmentManager = getFragmentManager();
+            if (fragmentManager != null) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                if (isSupportHidden) {
+                    ft.hide(this);
+                } else {
+                    ft.show(this);
+                }
+                ft.commitAllowingStateLoss();
             }
-            ft.commitAllowingStateLoss();
         }
     }
 
@@ -54,6 +61,13 @@ public abstract class BaseFragment extends Fragment {
         log();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        log();
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -67,8 +81,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        log();
         outState.putBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
+        log();
     }
 
     @Override
@@ -116,7 +130,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        log(this.hashCode() + "");
+        log();
     }
 
     @Override
@@ -125,17 +139,11 @@ public abstract class BaseFragment extends Fragment {
         log();
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        log();
-    }
+    protected abstract void initIntent();
 
-    @Override
-    public void onInflate(Activity activity, AttributeSet attrs, Bundle savedInstanceState) {
-        super.onInflate(activity, attrs, savedInstanceState);
-        log();
-    }
+    protected abstract void initView();
+
+    protected abstract void initListener();
 
     public void log(String log) {
         if (System.currentTimeMillis() != 0) {
@@ -161,10 +169,5 @@ public abstract class BaseFragment extends Fragment {
         Log.e("xbc", prefix);
     }
 
-    protected abstract void initIntent();
-
-    protected abstract void initView();
-
-    protected abstract void initListener();
 
 }

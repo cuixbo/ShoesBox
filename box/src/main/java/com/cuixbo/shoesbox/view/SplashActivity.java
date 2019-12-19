@@ -1,10 +1,11 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.cuixbo.lib.common.base.BaseActivity;
+import com.cuixbo.shoesbox.R;
 
 /**
  * 启动页面

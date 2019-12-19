@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
 import com.cuixbo.lib.common.base.BaseActivity;
+import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.presenter.ShoesPresenter;
 

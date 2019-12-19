@@ -21,7 +21,7 @@ public class BoxApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        // TODO 需要延迟加载
         ObjectBox.init(this);
         initOwners();
         initDictionary();

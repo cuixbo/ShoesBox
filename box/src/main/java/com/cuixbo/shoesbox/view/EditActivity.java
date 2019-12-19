@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,6 +18,8 @@ import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
 import com.cuixbo.lib.common.base.BaseActivity;
 import com.cuixbo.lib.common.util.PreferenceUtil;
+import com.cuixbo.shoesbox.Consts;
+import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Owner;
 import com.cuixbo.shoesbox.data.local.Shoes;

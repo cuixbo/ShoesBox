@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 
 import com.cuixbo.lib.common.base.BaseActivity;
+import com.cuixbo.shoesbox.R;
+import com.cuixbo.shoesbox.StatusBarUtil;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.google.android.material.tabs.TabLayout;
 
@@ -37,7 +39,7 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_v2);
+        setContentView(R.layout.activity_main);
         // 将StatusBar文字颜色设为深色
         StatusBarUtil.setStatusBarLightMode(getWindow(), true);
     }

@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cuixbo.shoesbox.R;
+import com.cuixbo.shoesbox.presenter.adapter.ShoesItemRecyclerViewAdapter;
 import com.cuixbo.shoesbox.data.local.Owner;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.presenter.ShoesPresenter;
