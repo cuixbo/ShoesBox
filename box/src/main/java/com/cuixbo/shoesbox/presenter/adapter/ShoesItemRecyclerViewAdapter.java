@@ -13,8 +13,10 @@ import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.view.ShoesListFragment.OnListFragmentInteractionListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -25,22 +27,29 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Shoes> mValues;
+    private final List<Shoes> mValues = new ArrayList<>();
     private final OnListFragmentInteractionListener mListener;
 
     public ShoesItemRecyclerViewAdapter(List<Shoes> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+        if (items != null && !items.isEmpty()) {
+            mValues.addAll(items);
+        }
         mListener = listener;
     }
 
     public void updateData(List<Shoes> items) {
-        mValues.clear();
-        if (items != null && !items.isEmpty()) {
-            mValues.addAll(items);
+        // 地址没变，只需要更新即可
+        if (mValues != items) {
+            // 地址变了，需要清空，并添加和更新。
+            mValues.clear();
+            if (items != null && !items.isEmpty()) {
+                mValues.addAll(items);
+            }
         }
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -106,6 +115,7 @@ public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItem
             mTvCreatedAt = view.findViewById(R.id.tv_created_at);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

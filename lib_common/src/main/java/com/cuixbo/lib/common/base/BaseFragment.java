@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,7 +33,7 @@ public abstract class BaseFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
-        log("Context");
+        log();
     }
 
     @Override
@@ -137,6 +138,14 @@ public abstract class BaseFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         log();
+    }
+
+    @Nullable
+    public final <T extends View> T findViewById(@IdRes int id) {
+        if (id == View.NO_ID || getView() == null) {
+            return null;
+        }
+        return getView().findViewById(id);
     }
 
     protected abstract void initIntent();

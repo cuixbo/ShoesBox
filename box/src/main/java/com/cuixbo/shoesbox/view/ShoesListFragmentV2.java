@@ -15,6 +15,7 @@ import com.cuixbo.shoesbox.view.ShoesListFragment.OnListFragmentInteractionListe
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,7 +39,7 @@ public class ShoesListFragmentV2 extends BaseFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
@@ -87,9 +88,10 @@ public class ShoesListFragmentV2 extends BaseFragment {
 //        updateData();
     }
 
-    public void updateData(List<Shoes> mData) {
+    public void updateData(List<Shoes> data) {
+        mData = data;
         if (mAdapter != null) {
-            mAdapter.updateData(mData);
+            mAdapter.updateData(data);
         }
     }
 

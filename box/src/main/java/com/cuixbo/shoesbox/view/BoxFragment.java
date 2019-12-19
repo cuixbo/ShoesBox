@@ -1,10 +1,8 @@
 package com.cuixbo.shoesbox.view;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -34,7 +31,6 @@ public class BoxFragment extends BaseFragment {
 
     private static final String ARG_MEMBER = "arg_member";
 
-
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private SuperTextView mNaviTitleBar;
@@ -43,7 +39,6 @@ public class BoxFragment extends BaseFragment {
     private String[] mTitle;
 
     public BoxFragment() {
-
     }
 
     @SuppressWarnings("unused")
@@ -55,62 +50,12 @@ public class BoxFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mOwner = (Owner) getArguments().getSerializable(ARG_MEMBER);
-        }
-        Log.e("xbc", "onCreate：" + this.hashCode());
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_box, container, false);
-        Log.e("xbc", "onCreateView：" + this.hashCode());
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initView();
-        initListener();
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.e("xbc", "onDestroyView：" + this.hashCode());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.e("xbc", "onDestroy：" + this.hashCode());
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_box, container, false);
     }
 
     @Override
     protected void initIntent() {
-
     }
 
     @Override
@@ -118,11 +63,9 @@ public class BoxFragment extends BaseFragment {
         if (getView() == null) {
             return;
         }
-
-        Log.e("xbc", "initView：" + this.hashCode());
-        mTabLayout = getView().findViewById(R.id.tab_layout);
-        mViewPager = getView().findViewById(R.id.view_pager);
-        mNaviTitleBar = getView().findViewById(R.id.navi_title_bar);
+        mTabLayout = findViewById(R.id.tab_layout);
+        mViewPager = findViewById(R.id.view_pager);
+        mNaviTitleBar = findViewById(R.id.navi_title_bar);
 
         mNaviTitleBar.setLeftIcon(0);
         mNaviTitleBar.setCenterString("SHOES-BOX");
@@ -158,6 +101,7 @@ public class BoxFragment extends BaseFragment {
                 return mFragments.size();
             }
         });
+
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
 
@@ -198,6 +142,5 @@ public class BoxFragment extends BaseFragment {
             }
         });
     }
-
 
 }
