@@ -16,7 +16,7 @@ import android.widget.ImageView;
 
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
-import com.cuixbo.lib.common.base.BaseActivity;
+import com.cuixbo.lib.common.base.BaseMvpActivity;
 import com.cuixbo.lib.common.util.PreferenceUtil;
 import com.cuixbo.shoesbox.Consts;
 import com.cuixbo.shoesbox.R;
@@ -46,7 +46,7 @@ import io.objectbox.Box;
  * @author xiaobocui
  * @date 2019-12-10
  */
-public class EditActivity extends BaseActivity {
+public class EditActivity extends BaseMvpActivity<ShoesPresenter> {
     private static final int REQUEST_CODE_CHOOSE = 11;
 
     private ImageView mImageView;
@@ -55,12 +55,11 @@ public class EditActivity extends BaseActivity {
     private Shoes mShoes;
     private long mShoesId = 0;
 
-    private ShoesPresenter mPresenter = new ShoesPresenter();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        setPresenter(new ShoesPresenter());
         load();
     }
 

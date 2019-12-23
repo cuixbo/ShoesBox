@@ -1,14 +1,13 @@
 package com.cuixbo.shoesbox.view;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.allen.library.SuperTextView;
-import com.cuixbo.lib.common.base.BaseFragment;
+import com.cuixbo.lib.common.base.BaseMvpFragment;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Owner;
@@ -27,7 +26,7 @@ import io.objectbox.Box;
  * @author xiaobocui
  * @date 2019-12-09
  */
-public class BoxFragment extends BaseFragment {
+public class BoxFragment extends BaseMvpFragment {
 
     private static final String ARG_MEMBER = "arg_member";
 
@@ -104,18 +103,7 @@ public class BoxFragment extends BaseFragment {
 
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
-
-        //去除Tab默认的Ripple效果
-        if (mTabLayout.getChildCount() > 0) {
-            ViewGroup tabStrip = ((ViewGroup) mTabLayout.getChildAt(0));
-            if (tabStrip != null && tabStrip.getChildCount() > 0) {
-                for (int i = 0; i < tabStrip.getChildCount(); i++) {
-                    if (tabStrip.getChildAt(i) != null) {
-                        tabStrip.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-                    }
-                }
-            }
-        }
+        mTabLayout.setTabRippleColor(null);
     }
 
     @Override

@@ -1,14 +1,13 @@
 package com.cuixbo.shoesbox.view;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ViewGroup;
 
-import com.cuixbo.lib.common.base.BaseActivity;
+import com.cuixbo.lib.common.base.BaseMvpActivity;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.StatusBarUtil;
 import com.cuixbo.shoesbox.data.local.Shoes;
+import com.cuixbo.shoesbox.presenter.MainPresenter;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import androidx.viewpager.widget.ViewPager;
  * @author xiaobocui
  * @date 2019-12-09
  */
-public class MainActivity extends BaseActivity implements ShoesListFragment.OnListFragmentInteractionListener {
+public class MainActivity extends BaseMvpActivity<MainPresenter> implements ShoesListFragment.OnListFragmentInteractionListener {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -36,18 +35,19 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
     private List<Fragment> mFragments = new ArrayList<Fragment>();
     private String[] mTitle = new String[]{"盒子", "查找", "我的"};
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setPresenter(new MainPresenter());
         // 将StatusBar文字颜色设为深色
         StatusBarUtil.setStatusBarLightMode(getWindow(), true);
     }
 
     @Override
     public void initIntent() {
-        Intent intent = new Intent(this, SettingActivity.class);
-//        startActivity(intent);
+
     }
 
     @Override
@@ -79,18 +79,7 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
         });
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
-
-        //去除Tab默认的Ripple效果
-        if (mTabLayout.getChildCount() > 0) {
-            ViewGroup tabStrip = ((ViewGroup) mTabLayout.getChildAt(0));
-            if (tabStrip != null && tabStrip.getChildCount() > 0) {
-                for (int i = 0; i < tabStrip.getChildCount(); i++) {
-                    if (tabStrip.getChildAt(i) != null) {
-                        tabStrip.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
-                    }
-                }
-            }
-        }
+        mTabLayout.setTabRippleColor(null);
     }
 
     @Override
@@ -120,4 +109,5 @@ public class MainActivity extends BaseActivity implements ShoesListFragment.OnLi
         intent.putExtra("shoes_id", item.id);
         startActivity(intent);
     }
+
 }

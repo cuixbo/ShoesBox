@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
-import com.cuixbo.lib.common.base.BaseActivity;
+import com.cuixbo.lib.common.base.BaseMvpActivity;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.presenter.ShoesPresenter;
@@ -18,7 +18,7 @@ import com.cuixbo.shoesbox.presenter.ShoesPresenter;
  * @author xiaobocui
  * @date 2019-12-10
  */
-public class DetailActivity extends BaseActivity {
+public class DetailActivity extends BaseMvpActivity<ShoesPresenter> {
 
     private ImageView mImageView;
     private SuperTextView mNaviTitleBar;
@@ -26,12 +26,11 @@ public class DetailActivity extends BaseActivity {
     private Shoes mShoes;
     private long mShoesId = 0;
 
-    private ShoesPresenter mPresenter = new ShoesPresenter();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        setPresenter(new ShoesPresenter());
     }
 
     @Override

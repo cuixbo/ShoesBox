@@ -11,11 +11,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
-import com.cuixbo.lib.common.base.BaseFragment;
+import com.cuixbo.lib.common.base.BaseMvpFragment;
 import com.cuixbo.shoesbox.R;
-import com.cuixbo.shoesbox.presenter.adapter.ShoesItemRecyclerViewAdapter;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.presenter.ShoesPresenter;
+import com.cuixbo.shoesbox.presenter.adapter.ShoesItemRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +28,14 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author xiaobocui
  * @date 2019-12-09
  */
-public class SearchFragment extends BaseFragment {
+public class SearchFragment extends BaseMvpFragment<ShoesPresenter> {
 
-    private static final String ARG_MEMBER = "arg_member";
     private ShoesItemRecyclerViewAdapter mAdapter;
     private ShoesListFragment.OnListFragmentInteractionListener mListener;
-    private ShoesPresenter mPresenter;
 
     private EditText mEtSearch;
 
     public SearchFragment() {
-        mPresenter = new ShoesPresenter();
     }
 
     @SuppressWarnings("unused")
@@ -63,14 +60,11 @@ public class SearchFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mOwner = (Owner) getArguments().getSerializable(ARG_MEMBER);
-        }
+        setPresenter(new ShoesPresenter());
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
