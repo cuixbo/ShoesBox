@@ -3,9 +3,9 @@ package com.cuixbo.shoesbox;
 import android.app.Application;
 
 import com.cuixbo.lib.common.util.PreferenceUtil;
+import com.cuixbo.shoesbox.data.Consts;
 import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Owner;
-import com.cuixbo.shoesbox.presenter.ShoesPresenter;
 
 import java.util.Arrays;
 
@@ -43,12 +43,12 @@ public class BoxApplication extends Application {
     }
 
     public void initDictionary() {
-        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.SEASONS, new ArraySet<>(Arrays.asList(ShoesPresenter.seasons)));
-        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.BRANDS, new ArraySet<>(Arrays.asList(ShoesPresenter.brands)));
-        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.TAGS, new ArraySet<>(Arrays.asList(ShoesPresenter.types)));
-        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.COLORS, new ArraySet<>(Arrays.asList(ShoesPresenter.colors)));
-        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.SIZES, new ArraySet<>(Arrays.asList(ShoesPresenter.sizes)));
-        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.TAGS, new ArraySet<>(Arrays.asList(ShoesPresenter.tags)));
+        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.SEASONS, new ArraySet<>(Arrays.asList(Consts.Dicts.seasons)));
+        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.BRANDS, new ArraySet<>(Arrays.asList(Consts.Dicts.brands)));
+        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.TAGS, new ArraySet<>(Arrays.asList(Consts.Dicts.types)));
+        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.COLORS, new ArraySet<>(Arrays.asList(Consts.Dicts.colors)));
+        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.SIZES, new ArraySet<>(Arrays.asList(Consts.Dicts.sizes)));
+        PreferenceUtil.get(this).setStringSet(Consts.Prefs.Keys.TAGS, new ArraySet<>(Arrays.asList(Consts.Dicts.tags)));
     }
 
 }

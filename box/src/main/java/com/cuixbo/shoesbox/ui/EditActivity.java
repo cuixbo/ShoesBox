@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox.view;
+package com.cuixbo.shoesbox.ui;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -16,17 +16,21 @@ import android.widget.ImageView;
 
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
-import com.cuixbo.lib.common.base.BaseMvpActivity;
+import com.cuixbo.lib.common.mvp.BaseMvpActivity;
 import com.cuixbo.lib.common.util.PreferenceUtil;
-import com.cuixbo.shoesbox.Consts;
 import com.cuixbo.shoesbox.R;
+import com.cuixbo.shoesbox.contract.EditContract;
+import com.cuixbo.shoesbox.data.Consts;
 import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Owner;
 import com.cuixbo.shoesbox.data.local.Shoes;
-import com.cuixbo.shoesbox.presenter.ShoesPresenter;
+import com.cuixbo.shoesbox.model.EditModel;
+import com.cuixbo.shoesbox.presenter.EditPresenter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
@@ -46,7 +50,7 @@ import io.objectbox.Box;
  * @author xiaobocui
  * @date 2019-12-10
  */
-public class EditActivity extends BaseMvpActivity<ShoesPresenter> {
+public class EditActivity extends BaseMvpActivity<EditPresenter> implements EditContract.View {
     private static final int REQUEST_CODE_CHOOSE = 11;
 
     private ImageView mImageView;
@@ -55,11 +59,17 @@ public class EditActivity extends BaseMvpActivity<ShoesPresenter> {
     private Shoes mShoes;
     private long mShoesId = 0;
 
+    private EditModel mModel = new EditModel();
+
+    @Override
+    public EditPresenter setPresenter() {
+        return new EditPresenter();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        setPresenter(new ShoesPresenter());
         load();
     }
 
@@ -69,9 +79,8 @@ public class EditActivity extends BaseMvpActivity<ShoesPresenter> {
         if (mShoesId == 0) {
             mShoes = new Shoes();
         } else {
-            mShoes = mPresenter.getShoesDetail(mShoesId);
+            mShoes = mModel.getShoesDetail(mShoesId);
         }
-//        mPresenter.getShoesBox().removeAll();
     }
 
     @Override
@@ -84,6 +93,23 @@ public class EditActivity extends BaseMvpActivity<ShoesPresenter> {
                 .setRightIcon(null)
                 .setRightString("完成")
                 .setRightTextColor(Color.DKGRAY);
+
+        AndPermission.with(this)
+                .runtime()
+                .permission(
+                        Permission.READ_EXTERNAL_STORAGE,
+                        Permission.WRITE_EXTERNAL_STORAGE,
+                        Permission.CAMERA
+                )
+                .onGranted(permissions -> {
+                    // Storage permission are allowed.
+                    Log.e("xbc", "onGranted");
+                })
+                .onDenied(permissions -> {
+                    Log.e("xbc", "onDenied");
+                    // Storage permission are not allowed.
+                })
+                .start();
     }
 
     @Override
@@ -125,14 +151,12 @@ public class EditActivity extends BaseMvpActivity<ShoesPresenter> {
         }
     }
 
-
     private void load() {
         if (mShoes.images != null && mShoes.images.length() > 0) {
             Glide.with(this)
                     .load(Uri.parse(mShoes.images))
                     .into(mImageView);
         }
-
         for (int i = 0; i < mDetailContainer.getChildCount(); i++) {
             SuperTextView view = (SuperTextView) mDetailContainer.getChildAt(i);
             switch (view.getLeftString()) {
@@ -211,7 +235,7 @@ public class EditActivity extends BaseMvpActivity<ShoesPresenter> {
         } else {
             mShoes.updateAt = time;
         }
-        mPresenter.getShoesBox().put(mShoes);
+        mModel.saveShoes(mShoes);
         finish();
     }
 

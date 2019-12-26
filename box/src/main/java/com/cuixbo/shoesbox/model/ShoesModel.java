@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox.data;
+package com.cuixbo.shoesbox.model;
 
 import com.cuixbo.shoesbox.data.local.ObjectBox;
 import com.cuixbo.shoesbox.data.local.Shoes;
@@ -11,11 +11,26 @@ import io.objectbox.Box;
 
 /**
  * @author xiaobocui
- * @date 2019-12-23
+ * @date 2019-12-24
  */
-public class DataCenter {
+public class ShoesModel {
 
-    public static List<Shoes> getShoesList(String ownerName) {
+    /**
+     * 获取Shoes的Box对象
+     *
+     * @return Box<Shoes> 实例
+     */
+    private Box<Shoes> getShoesBox() {
+        return ObjectBox.get().boxFor(Shoes.class);
+    }
+
+    /**
+     * 根据主人名称获取Shoes列表
+     *
+     * @param ownerName 主人名称
+     * @return List<Shoes> 列表
+     */
+    public List<Shoes> getShoesList(String ownerName) {
         return getShoesBox()
                 .query()
                 .equal(Shoes_.ownerName, ownerName)
@@ -23,7 +38,13 @@ public class DataCenter {
                 .find();
     }
 
-    public static List<Shoes> searchShoes(String keywords) {
+    /**
+     * 根据关键词查找Shoes列表
+     *
+     * @param keywords 关键词
+     * @return List<Shoes> 列表
+     */
+    public List<Shoes> searchShoes(String keywords) {
         if (keywords == null || keywords.isEmpty()) {
             return new ArrayList<>();
         }
@@ -42,11 +63,23 @@ public class DataCenter {
                 .find();
     }
 
-    public static Shoes getShoesDetail(long id) {
+    /**
+     * 根据ShoesId获取Shoes详情
+     *
+     * @param id ShoesId
+     * @return Shoes 实例
+     */
+    public Shoes getShoesDetail(long id) {
         return getShoesBox().get(id);
     }
 
-    public static List<Shoes> getShoesDetail(String sNumber) {
+    /**
+     * 根据Shoes编号获取Shoes详情
+     *
+     * @param sNumber 编号
+     * @return List<Shoes> 列表
+     */
+    public List<Shoes> getShoesDetail(String sNumber) {
         return getShoesBox()
                 .query()
                 .equal(Shoes_.sNumber, sNumber)
@@ -54,8 +87,14 @@ public class DataCenter {
                 .find();
     }
 
-    public static Box<Shoes> getShoesBox() {
-        return ObjectBox.get().boxFor(Shoes.class);
+    /**
+     * 更新/保存 Shoes实例
+     *
+     * @param shoes 要更新/保存的实例
+     * @return id
+     */
+    public long saveShoes(Shoes shoes) {
+        return getShoesBox().put(shoes);
     }
 
 }

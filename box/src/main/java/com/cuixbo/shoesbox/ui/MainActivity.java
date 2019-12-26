@@ -1,46 +1,45 @@
-package com.cuixbo.shoesbox.view;
+package com.cuixbo.shoesbox.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.cuixbo.lib.common.base.BaseMvpActivity;
+import com.cuixbo.lib.common.mvp.BaseMvpActivity;
 import com.cuixbo.shoesbox.R;
-import com.cuixbo.shoesbox.StatusBarUtil;
+import com.cuixbo.shoesbox.adapter.SimpleFragmentPagerAdapter;
+import com.cuixbo.shoesbox.contract.MainContract;
 import com.cuixbo.shoesbox.data.local.Shoes;
+import com.cuixbo.shoesbox.interf.OnListFragmentInteractionListener;
 import com.cuixbo.shoesbox.presenter.MainPresenter;
+import com.cuixbo.shoesbox.util.StatusBarUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * 1.list
- * 2.detail+edit
- * 3.me
- * 4.setting
- * 5.splash
- *
  * @author xiaobocui
  * @date 2019-12-09
  */
-public class MainActivity extends BaseMvpActivity<MainPresenter> implements ShoesListFragment.OnListFragmentInteractionListener {
+public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainContract.View, OnListFragmentInteractionListener<Shoes> {
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
-    private List<Fragment> mFragments = new ArrayList<Fragment>();
-    private String[] mTitle = new String[]{"盒子", "查找", "我的"};
+    private List<Fragment> mFragments = new ArrayList<>();
+    private String[] mTitles = new String[]{"盒子", "查找", "我的"};
 
+    @Override
+    public MainPresenter setPresenter() {
+        return new MainPresenter();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setPresenter(new MainPresenter());
         // 将StatusBar文字颜色设为深色
         StatusBarUtil.setStatusBarLightMode(getWindow(), true);
     }
@@ -59,24 +58,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Shoe
         mFragments.add(SearchFragment.newInstance());
         mFragments.add(MeFragment.newInstance());
 
-        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return mTitle[position];
-            }
-
-            @Override
-            public Fragment getItem(int position) {
-                return mFragments.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return mFragments.size();
-            }
-        });
+        mViewPager.setAdapter(new SimpleFragmentPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
         mTabLayout.setTabRippleColor(null);
@@ -109,5 +91,4 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Shoe
         intent.putExtra("shoes_id", item.id);
         startActivity(intent);
     }
-
 }

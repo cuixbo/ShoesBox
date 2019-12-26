@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,11 +28,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.Translucent" />
-        <activity android:name=".view.SettingActivity"></activity>
-        <activity android:name=".view.DetailActivity" />
-        <activity android:name=".view.EditActivity" />
+        <activity android:name=".ui.SettingActivity"></activity>
+        <activity android:name=".ui.EditActivity" />
         <!--添加provider-->
         <provider
             android:name="androidx.core.content.FileProvider"

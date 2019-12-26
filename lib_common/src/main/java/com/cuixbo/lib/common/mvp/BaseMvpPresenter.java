@@ -1,15 +1,15 @@
-package com.cuixbo.lib.common.base;
+package com.cuixbo.lib.common.mvp;
 
 /**
  * @author xiaobocui
  * @date 2019-12-23
  */
-public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
-    public V view;
+public abstract class BaseMvpPresenter<V extends IView> implements IPresenter<V> {
+    public V mView;
 
     @Override
     public void onAttach(V view) {
-        this.view = view;
+        this.mView = view;
     }
 
     @Override
@@ -34,16 +34,16 @@ public abstract class BasePresenter<V extends IView> implements IPresenter<V> {
 
     @Override
     public void onDetach() {
-        this.view = null;
+        this.mView = null;
     }
 
     @Override
     public void onDestroy() {
-        this.view = null;
+        this.mView = null;
     }
 
     @Override
     public boolean isAttached() {
-        return this.view != null;
+        return this.mView != null;
     }
 }

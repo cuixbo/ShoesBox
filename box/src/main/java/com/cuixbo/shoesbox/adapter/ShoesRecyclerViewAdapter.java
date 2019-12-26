@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox.presenter.adapter;
+package com.cuixbo.shoesbox.adapter;
 
 import android.net.Uri;
 import android.text.TextUtils;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.data.local.Shoes;
-import com.cuixbo.shoesbox.view.ShoesListFragment.OnListFragmentInteractionListener;
+import com.cuixbo.shoesbox.interf.OnListFragmentInteractionListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,28 +25,20 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author xiaobocui
  * @date 2019-12-19
  */
-public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItemRecyclerViewAdapter.ViewHolder> {
+public class ShoesRecyclerViewAdapter extends RecyclerView.Adapter<ShoesRecyclerViewAdapter.ViewHolder> {
 
     private final List<Shoes> mValues = new ArrayList<>();
     private final OnListFragmentInteractionListener mListener;
 
-    public ShoesItemRecyclerViewAdapter(List<Shoes> items, OnListFragmentInteractionListener listener) {
+    public ShoesRecyclerViewAdapter(List<Shoes> items, OnListFragmentInteractionListener listener) {
         if (items != null && !items.isEmpty()) {
             mValues.addAll(items);
         }
         mListener = listener;
     }
 
-    public void updateData(List<Shoes> items) {
-        // 地址没变，只需要更新即可
-        if (mValues != items) {
-            // 地址变了，需要清空，并添加和更新。
-            mValues.clear();
-            if (items != null && !items.isEmpty()) {
-                mValues.addAll(items);
-            }
-        }
-        notifyDataSetChanged();
+    public List<Shoes> getData() {
+        return mValues;
     }
 
     @NonNull
@@ -57,6 +49,7 @@ public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItem
         return new ViewHolder(view);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
@@ -66,6 +59,7 @@ public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItem
                     .into(holder.mImageView);
         }
         holder.mContentView.setText(getShoesContentString(holder.mItem));
+        holder.mTvNumber.setText(holder.mItem.sNumber);
         holder.mTvOwner.setText(holder.mItem.ownerName);
         holder.mTvCreatedAt.setText(holder.mItem.createAt);
         holder.mView.setOnClickListener(v -> {
@@ -96,14 +90,14 @@ public class ShoesItemRecyclerViewAdapter extends RecyclerView.Adapter<ShoesItem
         return builder.toString();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final ImageView mImageView;
-        public final TextView mContentView;
-        public final TextView mTvNumber;
-        public final TextView mTvOwner;
-        public final TextView mTvCreatedAt;
-        public Shoes mItem;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final ImageView mImageView;
+        final TextView mContentView;
+        final TextView mTvNumber;
+        final TextView mTvOwner;
+        final TextView mTvCreatedAt;
+        Shoes mItem;
 
         public ViewHolder(View view) {
             super(view);

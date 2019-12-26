@@ -1,4 +1,4 @@
-package com.cuixbo.lib.common.base;
+package com.cuixbo.lib.common.mvp;
 
 /**
  * @author xiaobocui

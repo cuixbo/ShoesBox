@@ -1,17 +1,23 @@
-package com.cuixbo.shoesbox.view;
+package com.cuixbo.shoesbox.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import com.cuixbo.lib.common.base.BaseMvpActivity;
+import com.cuixbo.lib.common.mvp.BaseMvpActivity;
+import com.cuixbo.lib.common.mvp.IPresenter;
 import com.cuixbo.shoesbox.R;
-import com.cuixbo.shoesbox.StatusBarUtil;
+import com.cuixbo.shoesbox.util.StatusBarUtil;
 
 /**
  * @author xiaobocui
  * @date 2019-12-16
  */
 public class SettingActivity extends BaseMvpActivity {
+
+    @Override
+    public IPresenter setPresenter() {
+        return null;
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override

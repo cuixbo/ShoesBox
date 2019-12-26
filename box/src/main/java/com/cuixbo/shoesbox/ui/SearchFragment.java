@@ -1,25 +1,23 @@
-package com.cuixbo.shoesbox.view;
+package com.cuixbo.shoesbox.ui;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
-import com.cuixbo.lib.common.base.BaseMvpFragment;
+import com.cuixbo.lib.common.mvp.BaseMvpFragment;
 import com.cuixbo.shoesbox.R;
+import com.cuixbo.shoesbox.adapter.ShoesRecyclerViewAdapter;
+import com.cuixbo.shoesbox.contract.SearchContract;
 import com.cuixbo.shoesbox.data.local.Shoes;
-import com.cuixbo.shoesbox.presenter.ShoesPresenter;
-import com.cuixbo.shoesbox.presenter.adapter.ShoesItemRecyclerViewAdapter;
+import com.cuixbo.shoesbox.interf.OnListFragmentInteractionListener;
+import com.cuixbo.shoesbox.presenter.SearchPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,29 +26,23 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author xiaobocui
  * @date 2019-12-09
  */
-public class SearchFragment extends BaseMvpFragment<ShoesPresenter> {
+public class SearchFragment extends BaseMvpFragment<SearchPresenter> implements SearchContract.View {
 
-    private ShoesItemRecyclerViewAdapter mAdapter;
-    private ShoesListFragment.OnListFragmentInteractionListener mListener;
+    private ShoesRecyclerViewAdapter mAdapter;
+    private OnListFragmentInteractionListener mListener;
 
     private EditText mEtSearch;
 
-    public SearchFragment() {
-    }
-
     @SuppressWarnings("unused")
     public static SearchFragment newInstance() {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new SearchFragment();
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ShoesListFragment.OnListFragmentInteractionListener) {
-            mListener = (ShoesListFragment.OnListFragmentInteractionListener) context;
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -58,14 +50,14 @@ public class SearchFragment extends BaseMvpFragment<ShoesPresenter> {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setPresenter(new ShoesPresenter());
+    public SearchPresenter setPresenter() {
+        return new SearchPresenter();
     }
 
+    @LayoutRes
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
+    public int setContentView() {
+        return R.layout.fragment_search;
     }
 
     @Override
@@ -78,21 +70,21 @@ public class SearchFragment extends BaseMvpFragment<ShoesPresenter> {
         if (getView() == null) {
             return;
         }
-        Context context = getView().getContext();
         RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
         mEtSearch = getView().findViewById(R.id.et_search);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mAdapter = new ShoesItemRecyclerViewAdapter(mPresenter.searchShoes(mEtSearch.getText().toString()), mListener);
+        mAdapter = new ShoesRecyclerViewAdapter(new ArrayList<>(), mListener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
         recyclerView.setAdapter(mAdapter);
+
+        //  mPresenter.load(mEtSearch.getText().toString());
     }
 
     @Override
     protected void initListener() {
         mEtSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                updateData(mPresenter.searchShoes(mEtSearch.getText().toString()));
-                Log.e("xbc", "actionId:" + actionId);
+                mPresenter.load(mEtSearch.getText().toString());
                 return true;
             }
             return false;
@@ -111,13 +103,18 @@ public class SearchFragment extends BaseMvpFragment<ShoesPresenter> {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mAdapter.updateData(new ArrayList<>());
+                mPresenter.load(null);
             }
         });
     }
 
-    public void updateData(List<Shoes> data) {
-        mAdapter.updateData(data);
-    }
 
+    @Override
+    public void updateData(List<Shoes> data) {
+        mAdapter.getData().clear();
+        if (data != null) {
+            mAdapter.getData().addAll(data);
+        }
+        mAdapter.notifyDataSetChanged();
+    }
 }

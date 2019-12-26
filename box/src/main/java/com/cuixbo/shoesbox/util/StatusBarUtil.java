@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox;
+package com.cuixbo.shoesbox.util;
 
 import android.app.Activity;
 import android.content.Context;

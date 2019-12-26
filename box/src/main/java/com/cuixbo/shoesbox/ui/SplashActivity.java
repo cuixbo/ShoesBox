@@ -1,4 +1,4 @@
-package com.cuixbo.shoesbox.view;
+package com.cuixbo.shoesbox.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

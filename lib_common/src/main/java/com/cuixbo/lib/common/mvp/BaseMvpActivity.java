@@ -1,6 +1,8 @@
-package com.cuixbo.lib.common.base;
+package com.cuixbo.lib.common.mvp;
 
 import android.os.Bundle;
+
+import com.cuixbo.lib.common.base.BaseActivity;
 
 import androidx.annotation.Nullable;
 
@@ -8,17 +10,15 @@ import androidx.annotation.Nullable;
  * @author xiaobocui
  * @date 2019-12-23
  */
-public abstract class BaseMvpActivity<P extends IPresenter> extends BaseActivity implements IView<P> {
+public abstract class BaseMvpActivity<P extends IPresenter> extends BaseActivity implements IView {
     public P mPresenter;
 
-    @Override
-    public void setPresenter(P presenter) {
-        mPresenter = presenter;
-    }
+    public abstract P setPresenter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = setPresenter();
         if (mPresenter != null) {
             mPresenter.onAttach(this);
         }
