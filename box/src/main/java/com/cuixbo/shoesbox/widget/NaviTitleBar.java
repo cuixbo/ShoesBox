@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
  * @author xiaobocui
  * @date 2019-12-23
  */
+@SuppressWarnings("unused")
 public class NaviTitleBar extends LinearLayout {
 
 
@@ -28,6 +29,7 @@ public class NaviTitleBar extends LinearLayout {
     public NaviTitleBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
 
 
 }

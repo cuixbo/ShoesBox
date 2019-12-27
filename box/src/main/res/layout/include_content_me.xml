@@ -60,6 +60,7 @@
             app:sRightIconRes="@null" />
 
         <com.allen.library.SuperTextView
+            android:id="@+id/stv_about"
             style="@style/EntryTheme"
             app:sLeftTextString="关于" />
     </LinearLayout>
