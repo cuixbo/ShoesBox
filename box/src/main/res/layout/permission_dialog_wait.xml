@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:gravity="center"
+    android:paddingStart="@dimen/permission_dp_20"
+    android:paddingTop="@dimen/permission_dp_5"
+    android:paddingEnd="@dimen/permission_dp_20"
+    android:paddingBottom="@dimen/permission_dp_5"
+    tools:background="@android:color/transparent" />
+<!-- 采用资源替换的方式，解决AndPermission 2.0.3 WaitDialog黑框一闪的问题。 如果后续解决了这个问题，这个布局可以去掉-->

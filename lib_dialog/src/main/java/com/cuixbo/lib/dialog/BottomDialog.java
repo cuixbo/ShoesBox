@@ -165,7 +165,7 @@ public class BottomDialog extends DialogFragment {
             return this;
         }
 
-        public Builder setOnMenuClickListener(OnItemClickListener listener) {
+        public Builder setOnItemClickListener(OnItemClickListener listener) {
             mParams.mListener = listener;
             return this;
         }

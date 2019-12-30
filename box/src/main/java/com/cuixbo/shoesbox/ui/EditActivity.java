@@ -1,5 +1,7 @@
 package com.cuixbo.shoesbox.ui;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -18,6 +20,7 @@ import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
 import com.cuixbo.lib.common.mvp.BaseMvpActivity;
 import com.cuixbo.lib.common.util.PreferenceUtil;
+import com.cuixbo.lib.dialog.BottomDialog;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.contract.EditContract;
 import com.cuixbo.shoesbox.data.Consts;
@@ -83,6 +86,7 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
         }
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void initView() {
         mImageView = findViewById(R.id.image);
@@ -94,22 +98,26 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
                 .setRightString("完成")
                 .setRightTextColor(Color.DKGRAY);
 
-        AndPermission.with(this)
-                .runtime()
-                .permission(
-                        Permission.READ_EXTERNAL_STORAGE,
-                        Permission.WRITE_EXTERNAL_STORAGE,
-                        Permission.CAMERA
-                )
-                .onGranted(permissions -> {
-                    // Storage permission are allowed.
-                    Log.e("xbc", "onGranted");
-                })
-                .onDenied(permissions -> {
-                    Log.e("xbc", "onDenied");
-                    // Storage permission are not allowed.
-                })
-                .start();
+        String[] ps = {
+                Permission.READ_EXTERNAL_STORAGE,
+                Permission.WRITE_EXTERNAL_STORAGE,
+                Permission.CAMERA
+        };
+
+        if (!AndPermission.hasPermissions(this, ps)) {
+            AndPermission.with(this)
+                    .runtime()
+                    .permission(ps)
+                    .onGranted(permissions -> {
+                        // Storage permission are allowed.
+                        Log.e("xbc", "onGranted");
+                    })
+                    .onDenied(permissions -> {
+                        Log.e("xbc", "onDenied");
+                        // Storage permission are not allowed.
+                    })
+                    .start();
+        }
     }
 
     @Override
@@ -122,7 +130,7 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
             switch (view.getLeftString()) {
                 case "编号":
                 case "备注":
-                    view.setOnClickListener(this::showDialog);
+                    view.setOnClickListener(this::showInputDialog);
                     break;
                 case "主人":
                     view.setOnClickListener(this::showMenuDialog);
@@ -247,7 +255,7 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
         });
     }
 
-    private void showDialog(View v) {
+    private void showInputDialog(View v) {
         final EditText input = new EditText(this);
         SuperTextView view = (SuperTextView) v;
         input.setText(view.getRightString());
@@ -274,13 +282,34 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
         for (int i = 0; i < owners.size(); i++) {
             ownerItems[i] = owners.get(i).name;
         }
-        new MaterialAlertDialogBuilder(this).setTitle("请选择")
-                .setItems(ownerItems, (dialog, which) -> {
-                    SuperTextView view = (SuperTextView) v;
-                    view.setRightString(ownerItems[which]);
+
+        /// Material 风格
+//        new MaterialAlertDialogBuilder(this).setTitle("请选择")
+//                .setItems(ownerItems, (dialog, which) -> {
+//                        SuperTextView stv = (SuperTextView) v;
+//                        stv.setRightString(ownerItems[which]);
+//                        dialog.dismiss();
+//                })
+//                .create()
+//                .show();
+
+        new BottomDialog.Builder(this)
+                .addItems(ownerItems)
+                .setOnItemClickListener(new BottomDialog.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Dialog dialog, View view, int which, String text) {
+                        SuperTextView stv = (SuperTextView) v;
+                        stv.setRightString(ownerItems[which]);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
                 })
                 .create()
-                .show();
+                .show(getSupportFragmentManager());
     }
 
     private void showChipInputDialog(View v, Set<String> set, OnChipInputListener listener) {
