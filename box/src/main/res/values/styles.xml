@@ -28,7 +28,7 @@
             true: 状态栏不透明、状态栏叠在content上面。
             false:状态栏不透明、状态栏与content线性排列
         -->
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
         <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
@@ -99,7 +99,7 @@
         <!-- 我的页面-功能入口样式 -->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/entry_height</item>
-        <item name="sRightIconRes">@drawable/ic_more_gray_light</item>
+        <item name="sRightIconRes">@drawable/ic_svg_enter</item>
         <item name="sLeftViewMarginLeft">16dp</item>
         <item name="sBottomDividerLineMarginLeft">16dp</item>
         <item name="sDividerLineType">bottom</item>

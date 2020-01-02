@@ -6,7 +6,7 @@
     android:layout_height="@dimen/nav_height"
     app:sCenterMaxEms="16"
     app:sCenterTextString="TITLE"
-    app:sLeftIconRes="@drawable/ic_back_gray_dark"
-    app:sRightIconRes="@drawable/ic_add_gray_dark"
+    app:sLeftIconRes="@drawable/ic_svg_back"
+    app:sRightIconRes="@drawable/ic_svg_add"
     app:sUseRipple="false" />
 

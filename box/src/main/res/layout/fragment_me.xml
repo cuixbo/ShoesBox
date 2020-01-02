@@ -57,7 +57,7 @@
                 app:contentInsetStart="0dp"
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_back_white"
+                app:navigationIcon="@drawable/ic_svg_back"
                 app:title="我的"
                 app:titleMarginStart="0dp"
                 app:titleTextAppearance="?attr/textAppearanceBody1"

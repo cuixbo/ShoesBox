@@ -29,6 +29,7 @@ import com.cuixbo.shoesbox.data.local.Owner;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.model.EditModel;
 import com.cuixbo.shoesbox.presenter.EditPresenter;
+import com.cuixbo.shoesbox.util.StatusBarUtil;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -73,6 +74,7 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        StatusBarUtil.setStatusBarLightMode(getWindow(), true);
         load();
     }
 

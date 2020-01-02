@@ -14,7 +14,6 @@ import com.cuixbo.lib.common.util.DeviceUtil;
  */
 public class StatusBarUtil {
 
-
     public static int getStatusBarHeight(Context context) {
         return DeviceUtil.getStatusHeight(context);
     }

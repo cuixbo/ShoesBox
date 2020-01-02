@@ -1,11 +1,15 @@
 package com.cuixbo.shoesbox.ui;
 
+import android.content.Intent;
+import android.graphics.Color;
+
 import com.cuixbo.lib.common.mvp.BaseMvpFragment;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.contract.MeContract;
 import com.cuixbo.shoesbox.presenter.MePresenter;
 
 import androidx.annotation.LayoutRes;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * @author xiaobocui
@@ -36,12 +40,13 @@ public class MeFragment extends BaseMvpFragment<MePresenter> implements MeContra
 
     @Override
     protected void initView() {
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.getNavigationIcon().mutate().setTint(Color.WHITE);
     }
 
     @Override
     protected void initListener() {
-
+        findViewById(R.id.stv_about).setOnClickListener(v -> startActivity(new Intent(getContext(), SettingActivity.class)));
     }
 
 }
