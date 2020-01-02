@@ -1,6 +1,5 @@
 package com.cuixbo.shoesbox.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -29,8 +28,8 @@ public class NaviTitleBar extends FrameLayout {
     private static final int DP_16 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, Resources.getSystem().getDisplayMetrics());
 
     AppCompatTextView mLeft, mCenter, mRight;
-
     int mNaviIconColor = COLOR_DEFAULT, mMenuIconColor = COLOR_DEFAULT;
+    OnNaviClickListener mOnNaviClickListener;
 
     public NaviTitleBar(Context context) {
         super(context);
@@ -58,7 +57,6 @@ public class NaviTitleBar extends FrameLayout {
         mRight = initRight(context);
         initListener();
     }
-
 
     private AppCompatTextView initLeft(Context context) {
         AppCompatTextView left = new AppCompatTextView(context);
@@ -111,11 +109,20 @@ public class NaviTitleBar extends FrameLayout {
 
     private void initListener() {
         mLeft.setOnClickListener(v -> {
-            if (getContext() instanceof Activity) {
-                Activity activity = (Activity) getContext();
-                activity.finish();
+            if (mOnNaviClickListener != null) {
+                mOnNaviClickListener.onNaviClick();
             }
         });
+
+        mRight.setOnClickListener(v -> {
+            if (mOnNaviClickListener != null) {
+                mOnNaviClickListener.onMenuClick();
+            }
+        });
+    }
+
+    public void setOnNaviClickListener(OnNaviClickListener onNaviClickListener) {
+        mOnNaviClickListener = onNaviClickListener;
     }
 
     public NaviTitleBar setTitle(String title) {
@@ -181,6 +188,13 @@ public class NaviTitleBar extends FrameLayout {
         Drawable mutated = getResources().getDrawable(drawable, null).mutate();
         DrawableCompat.setTint(mutated, color);
         return mutated;
+    }
+
+
+    public static abstract class OnNaviClickListener {
+        public void onNaviClick() {}
+
+        public void onMenuClick() {}
     }
 
 }

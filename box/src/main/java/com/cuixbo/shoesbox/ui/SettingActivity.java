@@ -24,8 +24,7 @@ public class SettingActivity extends BaseNaviActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         StatusBarUtil.setStatusBarLightMode(getWindow(), true);
-//        NaviTitleBar naviTitleBar = findViewById(R.id.navi_title_bar);
-//        naviTitleBar.setTitle("设计模式");
+        getNaviTitleBar().setTitle("设置");
     }
 
     @Override
