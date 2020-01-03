@@ -5,11 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 /**
  * @author xiaobocui
  * @date 2019-12-19
@@ -25,19 +28,28 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        initIntent();
-        initView();
-        initListener();
+    public void setContentView(@LayoutRes int layoutResId) {
+        super.setContentView(layoutResId);
+        init();
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
+        init();
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        init();
+    }
+
+    private void init() {
         initIntent();
         initView();
         initListener();
+        log();
     }
 
     @Override

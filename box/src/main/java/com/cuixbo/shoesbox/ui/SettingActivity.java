@@ -1,6 +1,5 @@
 package com.cuixbo.shoesbox.ui;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.cuixbo.lib.common.mvp.IPresenter;
@@ -18,13 +17,13 @@ public class SettingActivity extends BaseNaviActivity {
         return null;
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         StatusBarUtil.setStatusBarLightMode(getWindow(), true);
-        getNaviTitleBar().setTitle("设置");
+        setTitle("设置");
     }
 
     @Override
@@ -41,4 +40,5 @@ public class SettingActivity extends BaseNaviActivity {
     protected void initListener() {
 
     }
+
 }

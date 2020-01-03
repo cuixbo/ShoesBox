@@ -27,9 +27,9 @@ public class NaviTitleBar extends FrameLayout {
     private static final int COLOR_DEFAULT = 0xFF333333;
     private static final int DP_16 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, Resources.getSystem().getDisplayMetrics());
 
-    AppCompatTextView mLeft, mCenter, mRight;
-    int mNaviIconColor = COLOR_DEFAULT, mMenuIconColor = COLOR_DEFAULT;
-    OnNaviClickListener mOnNaviClickListener;
+    private AppCompatTextView mLeft, mCenter, mRight;
+    private int mNaviIconColor = COLOR_DEFAULT, mMenuIconColor = COLOR_DEFAULT;
+    private OnNaviClickListener mOnNaviClickListener;
 
     public NaviTitleBar(Context context) {
         super(context);
@@ -53,8 +53,8 @@ public class NaviTitleBar extends FrameLayout {
 
     private void init(Context context) {
         mLeft = initLeft(context);
-        mCenter = initCenter(context);
         mRight = initRight(context);
+        mCenter = initCenter(context);
         initListener();
     }
 
@@ -119,6 +119,19 @@ public class NaviTitleBar extends FrameLayout {
                 mOnNaviClickListener.onMenuClick();
             }
         });
+
+        mCenter.setOnClickListener(v -> {
+            if (mOnNaviClickListener != null) {
+                mOnNaviClickListener.onTitleClick();
+            }
+        });
+
+        mCenter.setOnLongClickListener(v -> {
+            if (mOnNaviClickListener != null) {
+                mOnNaviClickListener.onTitleLongClick();
+            }
+            return true;
+        });
     }
 
     public void setOnNaviClickListener(OnNaviClickListener onNaviClickListener) {
@@ -178,23 +191,31 @@ public class NaviTitleBar extends FrameLayout {
         return this;
     }
 
+    public NaviTitleBar setMenuVisibility(int visibility) {
+        mRight.setVisibility(visibility);
+        return this;
+    }
+
     private Drawable tintDrawable(Drawable drawable, @ColorInt int color) {
         Drawable mutated = drawable.mutate();
         DrawableCompat.setTint(mutated, color);
         return mutated;
     }
 
-    private Drawable tintDrawable(@DrawableRes int drawable, @ColorInt int color) {
-        Drawable mutated = getResources().getDrawable(drawable, null).mutate();
+    private Drawable tintDrawable(@DrawableRes int drawableRes, @ColorInt int color) {
+        Drawable mutated = getResources().getDrawable(drawableRes, null).mutate();
         DrawableCompat.setTint(mutated, color);
         return mutated;
     }
 
+    public interface OnNaviClickListener {
+        void onNaviClick();
 
-    public static abstract class OnNaviClickListener {
-        public void onNaviClick() {}
+        void onMenuClick();
 
-        public void onMenuClick() {}
+        void onTitleClick();
+
+        void onTitleLongClick();
     }
 
 }

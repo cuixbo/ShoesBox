@@ -13,6 +13,11 @@ import androidx.annotation.Nullable;
 public abstract class BaseMvpActivity<P extends IPresenter> extends BaseActivity implements IView {
     public P mPresenter;
 
+    /**
+     * 设置 Presenter
+     *
+     * @return Presenter
+     */
     public abstract P setPresenter();
 
     @Override
