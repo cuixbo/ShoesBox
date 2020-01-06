@@ -18,7 +18,6 @@ import android.widget.ImageView;
 
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
-import com.cuixbo.lib.common.mvp.BaseMvpActivity;
 import com.cuixbo.lib.common.util.PreferenceUtil;
 import com.cuixbo.lib.dialog.BottomDialog;
 import com.cuixbo.shoesbox.R;
@@ -54,11 +53,10 @@ import io.objectbox.Box;
  * @author xiaobocui
  * @date 2019-12-10
  */
-public class EditActivity extends BaseMvpActivity<EditPresenter> implements EditContract.View {
+public class EditActivity extends BaseNaviActivity<EditPresenter> implements EditContract.View {
     private static final int REQUEST_CODE_CHOOSE = 11;
 
     private ImageView mImageView;
-    private SuperTextView mNaviTitleBar;
     private ViewGroup mDetailContainer;
     private Shoes mShoes;
     private long mShoesId = 0;
@@ -92,13 +90,12 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
     @Override
     protected void initView() {
         mImageView = findViewById(R.id.image);
-        mNaviTitleBar = findViewById(R.id.navi_title_bar);
         mDetailContainer = findViewById(R.id.ll_detail_container);
 
-        mNaviTitleBar.setCenterString("资料编辑")
-                .setRightIcon(null)
-                .setRightString("完成")
-                .setRightTextColor(Color.DKGRAY);
+        getNaviTitleBar().setTitle("资料编辑")
+                .setMenuText("完成")
+                .setMenuIcon(0)
+                .setMenuIconColor(Color.GREEN);
 
         String[] ps = {
                 Permission.READ_EXTERNAL_STORAGE,
@@ -123,9 +120,13 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
     }
 
     @Override
+    public void onMenuClick() {
+        super.onMenuClick();
+        save();
+    }
+
+    @Override
     protected void initListener() {
-        mNaviTitleBar.setLeftImageViewClickListener(v -> finish());
-        mNaviTitleBar.setRightTvClickListener(this::save);
         mImageView.setOnClickListener(v -> takePhoto());
         for (int i = 0; i < mDetailContainer.getChildCount(); i++) {
             SuperTextView view = (SuperTextView) mDetailContainer.getChildAt(i);
@@ -160,6 +161,7 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
             }
         }
     }
+
 
     private void load() {
         if (mShoes.images != null && mShoes.images.length() > 0) {
@@ -265,9 +267,7 @@ public class EditActivity extends BaseMvpActivity<EditPresenter> implements Edit
         builder.setTitle(TextUtils.concat("填写", view.getLeftString(), "信息"))
                 .setView(input)
                 .setNegativeButton("取消", null)
-                .setPositiveButton("确定", (dialog, which) -> {
-                    view.setRightString(input.getText().toString());
-                })
+                .setPositiveButton("确定", (dialog, which) -> view.setRightString(input.getText().toString()))
                 .create()
                 .show();
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 48 * 6);

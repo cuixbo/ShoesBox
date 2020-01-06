@@ -33,11 +33,6 @@ public abstract class BaseNaviActivity<P extends IPresenter> extends BaseMvpActi
     private View mContentView;
 
     @Override
-    public P setPresenter() {
-        return null;
-    }
-
-    @Override
     public void setContentView(@LayoutRes int layoutResId) {
         mContainerWrapper = createWrapper();
         super.setContentView(wrapContentView(mContainerWrapper, layoutResId));
