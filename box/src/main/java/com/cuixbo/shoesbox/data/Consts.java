@@ -24,6 +24,9 @@ public class Consts {
             public static final String COLORS = "colors";
             public static final String SIZES = "sizes";
             public static final String TAGS = "tags";
+
+            public static final String PIC_MODE = "pic_mode";
+
         }
 
     }

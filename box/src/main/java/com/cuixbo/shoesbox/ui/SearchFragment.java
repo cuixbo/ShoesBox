@@ -115,6 +115,7 @@ public class SearchFragment extends BaseMvpFragment<SearchPresenter> implements 
         if (data != null) {
             mAdapter.getData().addAll(data);
         }
-        mAdapter.notifyDataSetChanged();
+//        mAdapter.notifyDataSetChanged();
+        mAdapter.notifyItemRangeChanged(0, mAdapter.getData().size());
     }
 }

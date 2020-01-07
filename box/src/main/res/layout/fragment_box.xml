@@ -10,9 +10,14 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
-        app:tabIndicatorColor="@color/text_title"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"
+        app:tabIndicatorColor="@color/color_title"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="1dp"
+        app:tabMode="auto"
         app:tabSelectedTextColor="@color/text_title"
         app:tabTextColor="@color/text_content" />
 

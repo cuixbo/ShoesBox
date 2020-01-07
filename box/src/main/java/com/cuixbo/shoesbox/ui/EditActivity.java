@@ -93,7 +93,7 @@ public class EditActivity extends BaseNaviActivity<EditPresenter> implements Edi
         mDetailContainer = findViewById(R.id.ll_detail_container);
 
         getNaviTitleBar().setTitle("资料编辑")
-                .setMenuText("完成")
+                .setMenuText("保存")
                 .setMenuIcon(0)
                 .setMenuIconColor(Color.GREEN);
 

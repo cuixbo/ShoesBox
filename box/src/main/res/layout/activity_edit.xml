@@ -18,8 +18,11 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:maxHeight="480dp"
+                android:minHeight="266dp"
+                android:scaleType="center"
                 android:src="@drawable/pic_oc" />
 
             <LinearLayout
