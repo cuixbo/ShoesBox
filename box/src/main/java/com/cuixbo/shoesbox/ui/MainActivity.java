@@ -61,6 +61,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         mViewPager.setAdapter(new SimpleFragmentPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0);
+        mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setTabRippleColor(null);
     }
 

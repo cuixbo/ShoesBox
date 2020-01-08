@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="A1"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:sShapeType="oval"
                 app:sSolidColor="@color/color_title" />
 

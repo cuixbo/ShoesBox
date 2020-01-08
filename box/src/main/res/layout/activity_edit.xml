@@ -23,7 +23,7 @@
                 android:maxHeight="480dp"
                 android:minHeight="266dp"
                 android:scaleType="center"
-                android:src="@drawable/pic_oc" />
+                android:src="@drawable/bg_pic_holder_2" />
 
             <LinearLayout
                 android:id="@+id/ll_detail_container"

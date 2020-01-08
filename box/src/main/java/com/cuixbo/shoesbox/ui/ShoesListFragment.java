@@ -3,7 +3,9 @@ package com.cuixbo.shoesbox.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.cuixbo.lib.common.mvp.BaseMvpFragment;
 import com.cuixbo.shoesbox.R;
@@ -12,6 +14,7 @@ import com.cuixbo.shoesbox.contract.ShoesListContract;
 import com.cuixbo.shoesbox.data.local.Shoes;
 import com.cuixbo.shoesbox.interf.OnListFragmentInteractionListener;
 import com.cuixbo.shoesbox.presenter.ShoesListPresenter;
+import com.cuixbo.shoesbox.util.DiffCallback;
 import com.cuixbo.shoesbox.widget.StaggeredSpaceItemDecoration;
 
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ import java.util.List;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -75,6 +80,13 @@ public class ShoesListFragment extends BaseMvpFragment<ShoesListPresenter> imple
         }
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        Log.e("xbc", "onCreateView");
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -118,7 +130,7 @@ public class ShoesListFragment extends BaseMvpFragment<ShoesListPresenter> imple
                         // 滑动停止且只要有一列span的第一个item完全可见，则认为到达顶部，可以重新绘制
                         boolean top = newState == RecyclerView.SCROLL_STATE_IDLE && firstVisible;
                         if (top) {
-                            staggeredGridLayoutManager.invalidateSpanAssignments();
+                            // staggeredGridLayoutManager.invalidateSpanAssignments();
                             // Log.e("xbc", "onScrollStateChanged:");
                         }
                         Log.e("xbc", "onScrollStateChanged:newState:" + newState + ",firstVisible:" + firstVisible + ",top:" + top + ",first:" + Arrays.toString(first));
@@ -135,7 +147,6 @@ public class ShoesListFragment extends BaseMvpFragment<ShoesListPresenter> imple
             mAdapter = new ShoesRecyclerViewAdapterStaggered(new ArrayList<>(), mListener);
             recyclerView.setAdapter(mAdapter);
         }
-        mPresenter.load(mOwnerName);
     }
 
     @Override
@@ -145,12 +156,33 @@ public class ShoesListFragment extends BaseMvpFragment<ShoesListPresenter> imple
 
     @Override
     public void updateData(List<Shoes> data) {
+        Log.e("xbc", "updateData");
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffCallback(mAdapter.getData(), data));
         mAdapter.getData().clear();
         if (data != null) {
             mAdapter.getData().addAll(data);
         }
-//        mAdapter.notifyDataSetChanged();
-        mAdapter.notifyItemRangeChanged(0, mAdapter.getData().size());
+        diffResult.dispatchUpdatesTo(mAdapter);
+//        mAdapter.notifyItemRangeChanged(0, mAdapter.getData().size());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e("xbc", "onStop");
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e("xbc", "onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("xbc", "onDestroy");
     }
 
     @Override

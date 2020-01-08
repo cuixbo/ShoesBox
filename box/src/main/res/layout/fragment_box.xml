@@ -11,8 +11,10 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="28dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@null"
         app:tabIndicatorColor="@color/color_title"
         app:tabIndicatorFullWidth="false"
