@@ -6,22 +6,33 @@
     android:orientation="vertical"
     android:paddingTop="20dp">
 
-    <include layout="@layout/navi_title_bar" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_height">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="28dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@null"
-        app:tabIndicatorColor="@color/color_title"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="1dp"
-        app:tabMode="auto"
-        app:tabSelectedTextColor="@color/text_title"
-        app:tabTextColor="@color/text_content" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            app:tabIndicatorColor="@color/color_title"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="1dp"
+            app:tabMode="auto"
+            app:tabSelectedTextColor="@color/text_title"
+            app:tabTextColor="@color/text_content" />
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center_vertical"
+            android:drawableStart="@drawable/ic_svg_add"
+            android:paddingEnd="@dimen/text_margin_small" />
+    </FrameLayout>
 
     <View style="@style/DividerTheme" />
 

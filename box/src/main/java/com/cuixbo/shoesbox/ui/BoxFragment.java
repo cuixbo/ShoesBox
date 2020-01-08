@@ -1,8 +1,8 @@
 package com.cuixbo.shoesbox.ui;
 
 import android.content.Intent;
+import android.widget.TextView;
 
-import com.allen.library.SuperTextView;
 import com.cuixbo.lib.common.mvp.BaseMvpFragment;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.adapter.SimpleFragmentPagerAdapter;
@@ -25,7 +25,7 @@ public class BoxFragment extends BaseMvpFragment<BoxPresenter> implements BoxCon
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-    private SuperTextView mNaviTitleBar;
+    private TextView mTvAdd;
 
     private List<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles = new String[0];
@@ -58,18 +58,17 @@ public class BoxFragment extends BaseMvpFragment<BoxPresenter> implements BoxCon
         }
         mTabLayout = findViewById(R.id.tab_layout);
         mViewPager = findViewById(R.id.view_pager);
-        mNaviTitleBar = findViewById(R.id.navi_title_bar);
+        mTvAdd = findViewById(R.id.tv_add);
 
         mTabLayout.setTabRippleColor(null);
-        mNaviTitleBar.setLeftIcon(0);
-        mNaviTitleBar.setCenterString("SHOES-BOX");
+
         // 根据主人进行Tab分区
         mPresenter.loadOwners();
     }
 
     @Override
     public void initListener() {
-        mNaviTitleBar.setRightImageViewClickListener(imageView -> {
+        mTvAdd.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), EditActivity.class);
             startActivity(intent);
         });
