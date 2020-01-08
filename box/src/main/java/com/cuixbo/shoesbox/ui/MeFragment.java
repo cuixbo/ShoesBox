@@ -46,7 +46,17 @@ public class MeFragment extends BaseMvpFragment<MePresenter> implements MeContra
 
     @Override
     protected void initListener() {
-        findViewById(R.id.stv_about).setOnClickListener(v -> startActivity(new Intent(getContext(), SettingActivity.class)));
+        findViewById(R.id.stv_setting).setOnClickListener(v -> startActivity(new Intent(getContext(), SettingActivity.class)));
+//
+//        findViewById(R.id.stv_clear_cache).setOnClickListener(v -> {
+//            ShoesModel model = new ShoesModel();
+//            List<Shoes> shoesList = model.getShoesList("");
+//            for (int i = 0; i < shoesList.size(); i++) {
+//                model.deleteShoes(shoesList.get(i));
+//            }
+//            Log.e("xbc", "shoesList.size:" + shoesList.size());
+//        });
     }
+
 
 }

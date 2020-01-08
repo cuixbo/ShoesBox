@@ -20,7 +20,7 @@
             android:background="@null"
             app:tabIndicatorColor="@color/color_title"
             app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="1dp"
+            app:tabIndicatorHeight="2dp"
             app:tabMode="auto"
             app:tabSelectedTextColor="@color/text_title"
             app:tabTextColor="@color/text_content" />

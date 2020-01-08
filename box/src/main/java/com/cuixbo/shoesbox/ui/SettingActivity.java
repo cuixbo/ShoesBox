@@ -1,8 +1,11 @@
 package com.cuixbo.shoesbox.ui;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 
 import com.cuixbo.lib.common.mvp.IPresenter;
+import com.cuixbo.lib.dialog.BottomDialog;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.util.StatusBarUtil;
 
@@ -41,4 +44,22 @@ public class SettingActivity extends BaseNaviActivity {
 
     }
 
+    @Override
+    public void onMenuClick() {
+        new BottomDialog.Builder(this)
+                .addItems("关于", "设置")
+                .setOnItemClickListener(new BottomDialog.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Dialog dialog, View view, int which, String text) {
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                })
+                .create()
+                .show(getSupportFragmentManager());
+    }
 }

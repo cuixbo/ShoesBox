@@ -55,14 +55,15 @@
         android:orientation="vertical">
 
         <com.allen.library.SuperTextView
+            android:id="@+id/stv_clear_cache"
             style="@style/EntryTheme"
             app:sLeftTextString="清理缓存"
             app:sRightIconRes="@null" />
 
         <com.allen.library.SuperTextView
-            android:id="@+id/stv_about"
+            android:id="@+id/stv_setting"
             style="@style/EntryTheme"
-            app:sLeftTextString="关于" />
+            app:sLeftTextString="设置" />
     </LinearLayout>
 </merge>
 

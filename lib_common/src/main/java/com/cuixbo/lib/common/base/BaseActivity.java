@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -139,5 +140,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             prefix = elements[3].getFileName().replace(".java", "") + "-->" + elements[3].getMethodName();
         }
         Log.e("xbc", prefix);
+    }
+
+    public void showToast(String content) {
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 }

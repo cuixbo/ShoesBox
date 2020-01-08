@@ -97,4 +97,25 @@ public class ShoesModel {
         return getShoesBox().put(shoes);
     }
 
+    /**
+     * 删除 Shoes记录
+     *
+     * @param id 要删除的shoes id
+     * @return boolean
+     */
+    public boolean deleteShoes(long id) {
+        return getShoesBox().remove(id);
+    }
+
+    /**
+     * 删除 Shoes记录
+     *
+     * @param shoes 要删除的shoes
+     * @return boolean
+     */
+    public boolean deleteShoes(Shoes shoes) {
+        return getShoesBox().remove(shoes);
+    }
+
+
 }

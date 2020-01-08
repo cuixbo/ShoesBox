@@ -240,6 +240,12 @@ public class EditActivity extends BaseNaviActivity<EditPresenter> implements Edi
                     break;
             }
         }
+
+        if (TextUtils.isEmpty(mShoes.ownerName)) {
+            showToast("请它的选择主人");
+            return;
+        }
+
         String time = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault())
                 .format(new Date());
         if (mShoesId == 0) {
