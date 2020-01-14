@@ -8,6 +8,7 @@ import com.cuixbo.lib.common.mvp.IPresenter;
 import com.cuixbo.lib.dialog.BottomDialog;
 import com.cuixbo.shoesbox.R;
 import com.cuixbo.shoesbox.util.StatusBarUtil;
+import com.google.android.material.tabs.TabLayout;
 
 /**
  * @author xiaobocui
@@ -36,7 +37,25 @@ public class SettingActivity extends BaseNaviActivity {
 
     @Override
     protected void initView() {
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 1) {
+                    tabLayout.selectTab(tabLayout.getTabAt(0));
+                }
+            }
 
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -62,4 +81,5 @@ public class SettingActivity extends BaseNaviActivity {
                 .create()
                 .show(getSupportFragmentManager());
     }
+
 }
