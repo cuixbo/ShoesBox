@@ -8,8 +8,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.1'
         classpath "io.objectbox:objectbox-gradle-plugin:$objectboxVersion"
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.1'
     }
 }
 

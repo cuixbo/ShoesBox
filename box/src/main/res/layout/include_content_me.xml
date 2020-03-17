@@ -36,6 +36,7 @@
         android:orientation="vertical">
 
         <com.allen.library.SuperTextView
+            android:id="@+id/stv_user_manager"
             style="@style/EntryTheme"
             app:sLeftTextString="用户管理" />
 

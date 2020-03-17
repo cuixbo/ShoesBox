@@ -80,7 +80,7 @@ public class NaviTitleBar extends FrameLayout {
         params.gravity = Gravity.CENTER;
 //        params.weight = 1.0F;
         center.setLayoutParams(params);
-        center.setText("设计如何");
+        center.setText("");
         center.setTextColor(COLOR_DEFAULT);
         center.setMaxEms(12);
         center.setSingleLine(true);

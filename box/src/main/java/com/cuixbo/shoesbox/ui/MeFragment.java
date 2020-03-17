@@ -10,6 +10,8 @@ import com.cuixbo.shoesbox.presenter.MePresenter;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.widget.Toolbar;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author xiaobocui
@@ -40,23 +42,24 @@ public class MeFragment extends BaseMvpFragment<MePresenter> implements MeContra
 
     @Override
     protected void initView() {
+        ButterKnife.bind(this, getView());
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.getNavigationIcon().mutate().setTint(Color.WHITE);
     }
 
     @Override
     protected void initListener() {
-        findViewById(R.id.stv_setting).setOnClickListener(v -> startActivity(new Intent(getContext(), SettingActivity.class)));
-//
-//        findViewById(R.id.stv_clear_cache).setOnClickListener(v -> {
-//            ShoesModel model = new ShoesModel();
-//            List<Shoes> shoesList = model.getShoesList("");
-//            for (int i = 0; i < shoesList.size(); i++) {
-//                model.deleteShoes(shoesList.get(i));
-//            }
-//            Log.e("xbc", "shoesList.size:" + shoesList.size());
-//        });
+
     }
 
+    @OnClick(R.id.stv_user_manager)
+    public void gotoUserManager() {
+        startActivity(new Intent(getContext(), OwnerManagerActivity.class));
+    }
+
+    @OnClick(R.id.stv_setting)
+    public void gotoSetting() {
+        startActivity(new Intent(getContext(), SettingActivity.class));
+    }
 
 }
