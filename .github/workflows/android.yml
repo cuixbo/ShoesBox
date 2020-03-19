@@ -20,5 +20,10 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleDebug
 
-    - store_artifacts:
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+      # Artifact name
+        name: Artifact name1
+      # Directory containing files to upload
         path: app/build/outputs
