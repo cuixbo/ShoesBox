@@ -40,5 +40,5 @@ jobs:
     - name: Upload Artifact , Module box
       uses: actions/upload-artifact@v1.0.0
       with:
-        name:
+        name: Artifact-box-outputs
         path: box/build/outputs
