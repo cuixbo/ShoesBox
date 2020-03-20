@@ -42,3 +42,7 @@ jobs:
       with:
         name: Artifact-box-outputs
         path: box/build/outputs
+
+    - run:
+      name: Upload to Pgyer
+      command: ./pgyer-upload.sh
