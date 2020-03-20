@@ -13,10 +13,10 @@ android {
     }
 
     signingConfigs {
-        shoesbox {
+        douban {
             keyAlias 'douban'
             keyPassword '123456'
-            storeFile file('../douban.jks')
+            storeFile file('../keystore/douban.jks')
             storePassword '123456'
         }
     }
@@ -25,10 +25,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.shoesbox
+            signingConfig signingConfigs.douban
         }
         debug {
-            signingConfig signingConfigs.shoesbox
+            signingConfig signingConfigs.douban
         }
     }
 }

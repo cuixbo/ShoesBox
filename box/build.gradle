@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.cuixbo.shoesbox"
@@ -12,6 +11,15 @@ android {
         versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        shoesbox {
+            keyAlias 'cuixbo'
+            keyPassword '123456'
+            storeFile file('../keystore/shoesbox.keystore')
+            storePassword '123456'
+        }
     }
 
     buildTypes {
@@ -71,10 +79,8 @@ dependencies {
     // 弹窗
     implementation 'com.github.SheHuan:NiceDialog:1.2.0'
 
-
     // 权限
     implementation 'com.yanzhenjie:permission:2.0.3'
-
 }
 
 // apply the plugin after the dependencies block
