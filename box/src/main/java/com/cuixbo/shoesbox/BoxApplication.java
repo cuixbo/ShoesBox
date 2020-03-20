@@ -1,6 +1,7 @@
 package com.cuixbo.shoesbox;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.cuixbo.lib.common.util.PreferenceUtil;
 import com.cuixbo.shoesbox.data.Consts;
@@ -10,6 +11,7 @@ import com.cuixbo.shoesbox.data.local.Owner;
 import java.util.Arrays;
 
 import androidx.collection.ArraySet;
+import androidx.multidex.MultiDex;
 import io.objectbox.Box;
 
 /**
@@ -17,6 +19,12 @@ import io.objectbox.Box;
  * @date 2019-12-09
  */
 public class BoxApplication extends Application {
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
