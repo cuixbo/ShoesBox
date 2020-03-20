@@ -35,7 +35,7 @@ jobs:
         java-version: 1.8
 
     - name: Build with Gradle , Module box
-      run: ./gradlew box:assembleRelease --stacktrace
+      run: ./gradlew box:assembleRelease --stacktrace --info
 
     - name: Upload Artifact , Module box
       uses: actions/upload-artifact@v1.0.0
@@ -43,6 +43,5 @@ jobs:
         name: Artifact-box-outputs
         path: box/build/outputs
 
-    - run:
-      name: Upload to Pgyer
-      command: ./pgyer-upload.sh
+    - name: Upload to Pgyer
+      run: ./pgyer-upload.sh
